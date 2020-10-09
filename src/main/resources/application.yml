@@ -1,0 +1,55 @@
+# 配置数据库连接 8.0
+spring:
+  datasource:
+    # =====================MySQL相关配置=====================
+    # 数据库类型
+    name: mysql
+    #数据库连接驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #数据库连接url
+    url: jdbc:mysql://127.0.0.1:3306/gourmet?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+    #数据库连接账号
+    username: root
+    #数据库连接密码
+    password: root
+    #使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    #==================druid相关配置=========================================
+    druid:
+      #监控统计用的filter：stat 日志用filter:log4j 防御sql注入用filter：wall
+      filters: stat,log4j,wall
+      #最大链接数量
+      max-active: 20
+      #初始化时建立物理连接的个数 初始化发生在显示调用init() 或者第一次getConnection时
+      initial-size: 1
+      #获取连接时的最大等待时间 毫秒
+      max-wait: 60000
+      #最小连接池数量
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      #链接保持空闲而不被驱逐的最长时间
+      min-evictable-idle-time-millis: 300000
+      #用来检验连接是否有效的sql mysql为select 1
+      # 如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会其作用
+      validation-query: select 1
+      # 申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
+      test-while-idle: true
+      # 申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      test-on-borrow: false
+      # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      test-on-return: false
+      # 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能
+      pool-prepared-statements: false
+      # 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true
+      max-open-prepared-statements: -1
+
+server:
+  # 后端api服务器端口
+  port: 3000
+
+# ====================mybatis==============================
+mybatis:
+  #配置mybatis的mapper xml文件映射
+  mapper-locations: classpath*:mapper/*.xml
+  #配置pojo映射
+  type-aliases-package: com.gourmetapi.domain
