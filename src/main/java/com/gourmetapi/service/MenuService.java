@@ -1,5 +1,6 @@
 package com.gourmetapi.service;
 
+import com.github.pagehelper.PageInfo;
 import com.gourmetapi.domain.GourmetMenu;
 
 import java.util.List;
@@ -15,4 +16,12 @@ public interface MenuService {
      * @return
      */
     List<GourmetMenu> getRecommendMenu();
+
+    /**
+     * 分页获取最新的菜谱表数据
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    PageInfo getWeekLatestMenu(int pageNo,int pageSize);
 }

@@ -53,3 +53,10 @@ mybatis:
   mapper-locations: classpath*:mapper/*.xml
   #配置pojo映射
   type-aliases-package: com.gourmetapi.domain
+
+# pagehelper 分页插件配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: countSql
