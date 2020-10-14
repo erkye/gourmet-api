@@ -43,4 +43,17 @@ public class IndexController {
     public PageInfo getWeekLatestData(@RequestParam(defaultValue = "1")int pageNo,@RequestParam(defaultValue = "10")int pageSize){
         return menuService.getWeekLatestMenu(pageNo, pageSize);
     }
+
+    /**
+     * 用户点击搜索
+     * @param key
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/search")
+    public PageInfo searchMenu(String key,@RequestParam(defaultValue = "1")int pageNo,@RequestParam(defaultValue = "10")int pageSize){
+        System.out.println(key);
+        return menuService.getSearchMenu(key, pageNo, pageSize);
+    }
 }

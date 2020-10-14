@@ -40,4 +40,14 @@ public class MenuServiceImpl implements MenuService {
         Collections.reverse(list);
         return new PageInfo<>(list);
     }
+
+    @Override
+    public PageInfo getSearchMenu(String key, int pageNO, int pageSize) {
+        PageHelper.startPage(pageNO, pageSize);
+        GourmetMenuExample example = new GourmetMenuExample();
+        GourmetMenuExample.Criteria criteria = example.createCriteria();
+        criteria.andTitleLike("%" + key + "%");
+        List<GourmetMenu> list = gourmetMenuMapper.selectByExample(example);
+        return new PageInfo<>(list);
+    }
 }

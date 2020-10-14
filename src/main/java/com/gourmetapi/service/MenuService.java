@@ -24,4 +24,13 @@ public interface MenuService {
      * @return
      */
     PageInfo getWeekLatestMenu(int pageNo,int pageSize);
+
+    /**
+     * 模糊分页查询菜单信息
+     * @param key 查询关键字
+     * @param pageNO 查询页码
+     * @param pageSize 每页大小
+     * @return
+     */
+    PageInfo getSearchMenu(String key,int pageNO,int pageSize);
 }
