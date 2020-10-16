@@ -15,6 +15,26 @@ public class GourmetMenu {
 
     private String content;
 
+    private Long pageviews;
+
+    private Long favorites;
+
+    public Long getPageviews() {
+        return pageviews;
+    }
+
+    public void setPageviews(Long pageviews) {
+        this.pageviews = pageviews;
+    }
+
+    public Long getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Long favorites) {
+        this.favorites = favorites;
+    }
+
     public Integer getId() {
         return id;
     }

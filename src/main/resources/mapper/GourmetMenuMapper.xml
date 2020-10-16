@@ -284,4 +284,18 @@
       recommend = #{recommend,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="selectWeekLatest" resultMap="BaseResultMap">
+      SELECT m.*,s.pageviews,s.favorites
+       FROM `gourmet_menu` m
+       LEFT JOIN gourmet_menu_scan s
+       ON m.id=s.menu_id
+       ORDER BY m.id DESC
+    </select>
+  <select id="selectByTitleLikeKey" resultMap="BaseResultMap">
+    SELECT m.*,s.pageviews,s.favorites
+    FROM `gourmet_menu` m
+    LEFT JOIN gourmet_menu_scan s
+    ON m.id=s.menu_id
+    WHERE m.title LIKE #{key}
+  </select>
 </mapper>

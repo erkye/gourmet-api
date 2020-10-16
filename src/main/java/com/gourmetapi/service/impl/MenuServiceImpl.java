@@ -9,7 +9,6 @@ import com.gourmetapi.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -34,20 +33,14 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public PageInfo getWeekLatestMenu(int pageNo, int pageSize) {
         PageHelper.startPage(pageNo, pageSize);
-        GourmetMenuExample example = new GourmetMenuExample();
-        example.setOrderByClause("id");
-        List<GourmetMenu> list = gourmetMenuMapper.selectByExample(example);
-        Collections.reverse(list);
+        List<GourmetMenu> list = gourmetMenuMapper.selectWeekLatest();
         return new PageInfo<>(list);
     }
 
     @Override
     public PageInfo getSearchMenu(String key, int pageNO, int pageSize) {
         PageHelper.startPage(pageNO, pageSize);
-        GourmetMenuExample example = new GourmetMenuExample();
-        GourmetMenuExample.Criteria criteria = example.createCriteria();
-        criteria.andTitleLike("%" + key + "%");
-        List<GourmetMenu> list = gourmetMenuMapper.selectByExample(example);
+        List<GourmetMenu> list = gourmetMenuMapper.selectByTitleLikeKey("%" + key + "%");
         return new PageInfo<>(list);
     }
 }

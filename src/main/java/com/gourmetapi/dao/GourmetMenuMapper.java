@@ -34,4 +34,19 @@ public interface GourmetMenuMapper {
     int updateByPrimaryKeyWithBLOBs(GourmetMenu record);
 
     int updateByPrimaryKey(GourmetMenu record);
+
+    /**
+     * 返回每周佳作的数据
+     * @return
+     */
+    List<GourmetMenu> selectWeekLatest();
+
+    /**
+     * 搜索模糊查询
+     * @param key
+     * @return
+     */
+    List<GourmetMenu> selectByTitleLikeKey(String key);
+
+
 }
