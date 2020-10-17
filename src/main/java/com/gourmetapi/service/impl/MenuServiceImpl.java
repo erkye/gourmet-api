@@ -2,9 +2,10 @@ package com.gourmetapi.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.gourmetapi.dao.GourmetMaterialsMapper;
 import com.gourmetapi.dao.GourmetMenuMapper;
-import com.gourmetapi.domain.GourmetMenu;
-import com.gourmetapi.domain.GourmetMenuExample;
+import com.gourmetapi.dao.GourmetMenuScanMapper;
+import com.gourmetapi.domain.*;
 import com.gourmetapi.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,12 @@ public class MenuServiceImpl implements MenuService {
 
     @Autowired
     private GourmetMenuMapper gourmetMenuMapper;
+
+    @Autowired
+    private GourmetMenuScanMapper gourmetMenuScanMapper;
+
+    @Autowired
+    private GourmetMaterialsMapper gourmetMaterialsMapper;
 
 
     @Override
@@ -42,5 +49,32 @@ public class MenuServiceImpl implements MenuService {
         PageHelper.startPage(pageNO, pageSize);
         List<GourmetMenu> list = gourmetMenuMapper.selectByTitleLikeKey("%" + key + "%");
         return new PageInfo<>(list);
+    }
+
+    @Override
+    public GourmetMenu getOneById(int id) {
+        // 获取一次浏览量+1
+        GourmetMenuScanExample example = new GourmetMenuScanExample();
+        GourmetMenuScanExample.Criteria criteria = example.createCriteria();
+        criteria.andMenuIdEqualTo(id);
+        List<GourmetMenuScan> gourmetMenuScansList = gourmetMenuScanMapper.selectByExample(example);
+        if(gourmetMenuScansList != null && gourmetMenuScansList.size()>0){
+            // 修改第一项
+            GourmetMenuScan menuScan = gourmetMenuScansList.get(0);
+            menuScan.setPageviews(menuScan.getPageviews()+1);
+            gourmetMenuScanMapper.updateByPrimaryKey(menuScan);
+        }
+        GourmetMenuExample menuExample = new GourmetMenuExample();
+        GourmetMenuExample.Criteria menuExampleCriteria = menuExample.createCriteria();
+        menuExampleCriteria.andIdEqualTo(id);
+        return gourmetMenuMapper.selectByExampleWithBLOBs(menuExample).get(0);
+    }
+
+    @Override
+    public List<GourmetMaterials> getMaterialsByMenuId(int menuId) {
+        GourmetMaterialsExample example = new GourmetMaterialsExample();
+        GourmetMaterialsExample.Criteria criteria = example.createCriteria();
+        criteria.andMenuIdEqualTo(menuId);
+        return gourmetMaterialsMapper.selectByExample(example);
     }
 }

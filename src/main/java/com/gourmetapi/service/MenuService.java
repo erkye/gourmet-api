@@ -1,6 +1,7 @@
 package com.gourmetapi.service;
 
 import com.github.pagehelper.PageInfo;
+import com.gourmetapi.domain.GourmetMaterials;
 import com.gourmetapi.domain.GourmetMenu;
 
 import java.util.List;
@@ -33,4 +34,18 @@ public interface MenuService {
      * @return
      */
     PageInfo getSearchMenu(String key,int pageNO,int pageSize);
+
+    /**
+     * 根据id查询菜谱
+     * @param id
+     * @return
+     */
+    GourmetMenu getOneById(int id);
+
+    /**
+     * 根据菜谱的id查询菜谱用料数据
+     * @param menuId
+     * @return
+     */
+    List<GourmetMaterials> getMaterialsByMenuId(int menuId);
 }
