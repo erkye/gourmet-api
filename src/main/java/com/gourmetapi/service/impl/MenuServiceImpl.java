@@ -67,7 +67,18 @@ public class MenuServiceImpl implements MenuService {
         GourmetMenuExample menuExample = new GourmetMenuExample();
         GourmetMenuExample.Criteria menuExampleCriteria = menuExample.createCriteria();
         menuExampleCriteria.andIdEqualTo(id);
-        return gourmetMenuMapper.selectByExampleWithBLOBs(menuExample).get(0);
+        GourmetMenu gourmetMenu = gourmetMenuMapper.selectByExampleWithBLOBs(menuExample).get(0);
+        if(gourmetMenu!=null){
+            GourmetMenuScanExample scanExample = new GourmetMenuScanExample();
+            GourmetMenuScanExample.Criteria criteria1 = scanExample.createCriteria();
+            criteria1.andMenuIdEqualTo(gourmetMenu.getId());
+            GourmetMenuScan gourmetMenuScan = gourmetMenuScanMapper.selectByExample(scanExample).get(0);
+            if(gourmetMenuScan!=null){
+                gourmetMenu.setFavorites(gourmetMenuScan.getFavorites());
+                gourmetMenu.setPageviews(gourmetMenuScan.getPageviews());
+            }
+        }
+        return gourmetMenu;
     }
 
     @Override
