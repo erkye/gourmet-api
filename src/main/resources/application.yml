@@ -42,6 +42,14 @@ spring:
       pool-prepared-statements: false
       # 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true
       max-open-prepared-statements: -1
+  # 文件上传配置
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 0
+      max-file-size: 100MB
+      max-request-size: 100MB
+
 
 server:
   # 后端api服务器端口
@@ -60,3 +68,6 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: countSql
+
+# 自定义文件删除位置
+user.filepath: E:/upload/
