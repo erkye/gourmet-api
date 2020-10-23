@@ -6,9 +6,11 @@ import com.gourmetapi.dao.GourmetMaterialsMapper;
 import com.gourmetapi.dao.GourmetMenuMapper;
 import com.gourmetapi.dao.GourmetMenuScanMapper;
 import com.gourmetapi.domain.*;
+import com.gourmetapi.domain.vo.PublishVo;
 import com.gourmetapi.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -87,5 +89,27 @@ public class MenuServiceImpl implements MenuService {
         GourmetMaterialsExample.Criteria criteria = example.createCriteria();
         criteria.andMenuIdEqualTo(menuId);
         return gourmetMaterialsMapper.selectByExample(example);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public boolean insertMenu(PublishVo publishVo) {
+        GourmetMenu menu = publishVo.getGourmetMenu();
+        int i1 = gourmetMenuMapper.insert(menu);
+        List<GourmetMaterials> materials = publishVo.getMaterials();
+        int i2 = 0;
+        for (GourmetMaterials material : materials) {
+            material.setMenuId(menu.getId());
+            i2+=gourmetMaterialsMapper.insert(material);
+        }
+        GourmetMenuScan gourmetMenuScan = new GourmetMenuScan();
+        gourmetMenuScan.setPageviews(0L);
+        gourmetMenuScan.setFavorites(0L);
+        gourmetMenuScan.setMenuId(menu.getId());
+
+        int i3 = gourmetMenuScanMapper.insert(gourmetMenuScan);
+
+        return i1 + i2 + i3 == publishVo.getMaterials().size() + 2;
+
     }
 }

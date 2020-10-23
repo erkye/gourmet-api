@@ -125,6 +125,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.gourmetapi.domain.GourmetMenu" >
+    <selectKey keyProperty="id" resultType="java.lang.Integer">
+      select LAST_INSERT_ID() as id
+    </selectKey>
     insert into gourmet_menu (id, img, title, 
       introd, nickname, recommend, 
       content)

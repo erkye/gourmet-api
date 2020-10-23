@@ -90,4 +90,19 @@ public class GourmetMenu {
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
     }
+
+    @Override
+    public String toString() {
+        return "GourmetMenu{" +
+                "id=" + id +
+                ", img='" + img + '\'' +
+                ", title='" + title + '\'' +
+                ", introd='" + introd + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", recommend=" + recommend +
+                ", content='" + content + '\'' +
+                ", pageviews=" + pageviews +
+                ", favorites=" + favorites +
+                '}';
+    }
 }

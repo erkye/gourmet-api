@@ -3,6 +3,7 @@ package com.gourmetapi.service;
 import com.github.pagehelper.PageInfo;
 import com.gourmetapi.domain.GourmetMaterials;
 import com.gourmetapi.domain.GourmetMenu;
+import com.gourmetapi.domain.vo.PublishVo;
 
 import java.util.List;
 
@@ -48,4 +49,10 @@ public interface MenuService {
      * @return
      */
     List<GourmetMaterials> getMaterialsByMenuId(int menuId);
+
+    /**
+     * 插入菜单
+     * @param publishVo
+     */
+    boolean insertMenu(PublishVo publishVo);
 }
