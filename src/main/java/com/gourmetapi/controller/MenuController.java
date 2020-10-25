@@ -50,8 +50,26 @@ public class MenuController {
         return menuService.insertMenu(publishVo)?"ok":"fail";
     }
 
+    /**
+     * 用户点击收藏
+     * @param nickName
+     * @param menuId
+     * @return
+     */
+
     @GetMapping("/star")
     public Boolean starMenu(@RequestParam String nickName,@RequestParam Integer menuId){
         return menuService.insertStarMenu(nickName, menuId);
+    }
+
+    /**
+     * 修改菜谱
+     * @param publishVo
+     * @return
+     */
+
+    @PostMapping("/update")
+    public Boolean updatePublishMenu(@RequestBody PublishVo publishVo){
+        return menuService.updatePublishMenu(publishVo);
     }
 }

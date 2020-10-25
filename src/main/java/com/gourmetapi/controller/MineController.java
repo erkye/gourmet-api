@@ -42,4 +42,24 @@ public class MineController {
     public Boolean cancelStar(@RequestParam String nickName,@RequestParam Integer menuId){
         return menuService.deleteStar(nickName, menuId);
     }
+
+    /**
+     * 根据用户的昵称查询用户的发布的菜谱列表
+     * @param nickName
+     * @return
+     */
+    @GetMapping("/publish")
+    public List<GourmetMenu> getMyPublishList(@RequestParam String nickName){
+        return menuService.getMyPublishMenuList(nickName);
+    }
+
+    /**
+     * 根据菜谱的id删除用户的发布的菜谱
+     * @param menuId
+     * @return
+     */
+    @GetMapping("/deletePublish")
+    public Boolean deleteMyPublishMenuByMenuId(@RequestParam Integer menuId){
+        return menuService.deleteMenuById(menuId);
+    }
 }

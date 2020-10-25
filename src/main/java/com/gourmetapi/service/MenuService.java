@@ -78,4 +78,25 @@ public interface MenuService {
      * @return
      */
     boolean insertStarMenu(String nickName,Integer menuId);
+
+    /**
+     * 根据用户的昵称查询用户发布的菜谱列表
+     * @param nickName
+     * @return
+     */
+    List<GourmetMenu> getMyPublishMenuList(String nickName);
+
+    /**
+     * 更具菜谱的id删除菜谱的相关数据（菜谱表、用料表、scan表，用户收藏表）
+     * @param menuId
+     * @return
+     */
+    Boolean deleteMenuById(Integer menuId);
+
+    /**
+     * 修改发布的菜谱
+     * @param publishVo
+     * @return
+     */
+    Boolean updatePublishMenu(PublishVo publishVo);
 }

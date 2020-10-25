@@ -40,4 +40,14 @@ public class GourmetMaterials {
     public void setQuantity(String quantity) {
         this.quantity = quantity == null ? null : quantity.trim();
     }
+
+    @Override
+    public String toString() {
+        return "GourmetMaterials{" +
+                "id=" + id +
+                ", menuId=" + menuId +
+                ", name='" + name + '\'' +
+                ", quantity='" + quantity + '\'' +
+                '}';
+    }
 }

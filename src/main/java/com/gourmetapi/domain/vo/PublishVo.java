@@ -13,6 +13,9 @@ import java.util.List;
  */
 public class PublishVo {
 
+    // 菜谱的id 在生成菜谱实体不会使用此参数，若要使用需要自行设置
+    private int id;
+
     private String img;
 
     private String title;
@@ -55,6 +58,14 @@ public class PublishVo {
                 ", content='" + content + '\'' +
                 ", materials=" + materials +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getImg() {

@@ -2,7 +2,10 @@ package com.gourmetapi.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.gourmetapi.dao.*;
+import com.gourmetapi.dao.GourmetMaterialsMapper;
+import com.gourmetapi.dao.GourmetMenuMapper;
+import com.gourmetapi.dao.GourmetMenuScanMapper;
+import com.gourmetapi.dao.GourmetStarMapper;
 import com.gourmetapi.domain.*;
 import com.gourmetapi.domain.vo.PublishVo;
 import com.gourmetapi.service.MenuService;
@@ -18,6 +21,7 @@ import java.util.List;
  * @date 2020-10-9 - 20:30
  */
 @Service
+@Transactional
 public class MenuServiceImpl implements MenuService {
 
     @Autowired
@@ -180,5 +184,78 @@ public class MenuServiceImpl implements MenuService {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<GourmetMenu> getMyPublishMenuList(String nickName) {
+
+        GourmetMenuExample menuExample = new GourmetMenuExample();
+        GourmetMenuExample.Criteria menuExampleCriteria = menuExample.createCriteria();
+        menuExampleCriteria.andNicknameEqualTo(nickName.trim());
+        List<GourmetMenu> list = gourmetMenuMapper.selectByExample(menuExample);
+        for (GourmetMenu menu : list) {
+            GourmetMenuScanExample scanExample = new GourmetMenuScanExample();
+            GourmetMenuScanExample.Criteria scanExampleCriteria = scanExample.createCriteria();
+            scanExampleCriteria.andMenuIdEqualTo(menu.getId());
+            List<GourmetMenuScan> scans = gourmetMenuScanMapper.selectByExample(scanExample);
+            if(scans.size()>0){
+                GourmetMenuScan scan = scans.get(0);
+                menu.setFavorites(scan.getFavorites());
+                menu.setPageviews(scan.getPageviews());
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public Boolean deleteMenuById(Integer menuId) {
+        // 删除菜谱表
+        int i = gourmetMenuMapper.deleteByPrimaryKey(menuId);
+
+        // 删除用料表
+        GourmetMaterialsExample materialsExample = new GourmetMaterialsExample();
+        GourmetMaterialsExample.Criteria materialsExampleCriteria = materialsExample.createCriteria();
+        materialsExampleCriteria.andMenuIdEqualTo(menuId);
+        i += gourmetMaterialsMapper.deleteByExample(materialsExample);
+
+        // 删除浏览信息表
+        GourmetMenuScanExample scanExample = new GourmetMenuScanExample();
+        GourmetMenuScanExample.Criteria scanExampleCriteria = scanExample.createCriteria();
+        scanExampleCriteria.andMenuIdEqualTo(menuId);
+        i += gourmetMenuScanMapper.deleteByExample(scanExample);
+
+        // 删除用户收藏表
+        GourmetStarExample starExample = new GourmetStarExample();
+        GourmetStarExample.Criteria starExampleCriteria = starExample.createCriteria();
+        starExampleCriteria.andMenuIdEqualTo(menuId);
+        i += gourmetStarMapper.deleteByExample(starExample);
+
+        return i>0;
+    }
+
+    @Override
+    public Boolean updatePublishMenu(PublishVo publishVo) {
+        // 获取菜谱实体 并设置菜谱的id
+        GourmetMenu menu = publishVo.getGourmetMenu();
+        menu.setId(publishVo.getId());
+
+        // 修改菜谱表
+        int i = gourmetMenuMapper.updateByPrimaryKeyWithBLOBs(menu);
+        // 修改用料表的数据
+        List<GourmetMaterials> materials = publishVo.getMaterials();
+        // 先删除
+        GourmetMaterialsExample example = new GourmetMaterialsExample();
+        GourmetMaterialsExample.Criteria criteria = example.createCriteria();
+        criteria.andMenuIdEqualTo(menu.getId());
+        gourmetMaterialsMapper.deleteByExample(example);
+        // 后插入
+        for (GourmetMaterials material : materials) {
+            material.setId(null);
+            material.setMenuId(menu.getId());
+            i += gourmetMaterialsMapper.insert(material);
+        }
+
+
+        return i>0;
     }
 }
