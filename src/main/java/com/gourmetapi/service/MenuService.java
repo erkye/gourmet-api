@@ -55,4 +55,27 @@ public interface MenuService {
      * @param publishVo
      */
     boolean insertMenu(PublishVo publishVo);
+
+    /**
+     * 根据用户的昵称查找该用户收藏的菜谱
+     * @param nickName
+     * @return
+     */
+    List<GourmetMenu> getMyStarMenuList(String nickName);
+
+    /**
+     * 根据用户昵称和菜谱的id删除收藏记录中
+     * @param nickName
+     * @param menuId
+     * @return
+     */
+    boolean deleteStar(String nickName,Integer menuId);
+
+    /**
+     * 用户点击收藏菜单
+     * @param nickName
+     * @param menuId
+     * @return
+     */
+    boolean insertStarMenu(String nickName,Integer menuId);
 }

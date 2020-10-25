@@ -49,4 +49,9 @@ public class MenuController {
     public String publishMenu(@RequestBody PublishVo publishVo){
         return menuService.insertMenu(publishVo)?"ok":"fail";
     }
+
+    @GetMapping("/star")
+    public Boolean starMenu(@RequestParam String nickName,@RequestParam Integer menuId){
+        return menuService.insertStarMenu(nickName, menuId);
+    }
 }

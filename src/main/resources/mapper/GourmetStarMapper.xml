@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gourmetapi.dao.GourmetStarMapper" >
   <resultMap id="BaseResultMap" type="com.gourmetapi.domain.GourmetStarKey" >
-    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <id column="nick_name" property="nickName" jdbcType="VARCHAR" />
     <id column="menu_id" property="menuId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -64,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    user_id, menu_id
+    nick_name, menu_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gourmetapi.domain.GourmetStarExample" >
     select
@@ -82,7 +82,7 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.gourmetapi.domain.GourmetStarKey" >
     delete from gourmet_star
-    where user_id = #{userId,jdbcType=INTEGER}
+    where nick_name = #{nickName,jdbcType=VARCHAR}
       and menu_id = #{menuId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.gourmetapi.domain.GourmetStarExample" >
@@ -92,22 +92,22 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.gourmetapi.domain.GourmetStarKey" >
-    insert into gourmet_star (user_id, menu_id)
-    values (#{userId,jdbcType=INTEGER}, #{menuId,jdbcType=INTEGER})
+    insert into gourmet_star (nick_name, menu_id)
+    values (#{nickName,jdbcType=VARCHAR}, #{menuId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.gourmetapi.domain.GourmetStarKey" >
     insert into gourmet_star
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        user_id,
+      <if test="nickName != null" >
+        nick_name,
       </if>
       <if test="menuId != null" >
         menu_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="menuId != null" >
         #{menuId,jdbcType=INTEGER},
@@ -123,8 +123,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update gourmet_star
     <set >
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=INTEGER},
+      <if test="record.nickName != null" >
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
       </if>
       <if test="record.menuId != null" >
         menu_id = #{record.menuId,jdbcType=INTEGER},
@@ -136,7 +136,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update gourmet_star
-    set user_id = #{record.userId,jdbcType=INTEGER},
+    set nick_name = #{record.nickName,jdbcType=VARCHAR},
       menu_id = #{record.menuId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />

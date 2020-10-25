@@ -1,16 +1,16 @@
 package com.gourmetapi.domain;
 
 public class GourmetStarKey {
-    private Integer userId;
+    private String nickName;
 
     private Integer menuId;
 
-    public Integer getUserId() {
-        return userId;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setNickName(String nickName) {
+        this.nickName = nickName == null ? null : nickName.trim();
     }
 
     public Integer getMenuId() {

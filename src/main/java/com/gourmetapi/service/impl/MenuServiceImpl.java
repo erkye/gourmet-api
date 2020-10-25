@@ -2,9 +2,7 @@ package com.gourmetapi.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.gourmetapi.dao.GourmetMaterialsMapper;
-import com.gourmetapi.dao.GourmetMenuMapper;
-import com.gourmetapi.dao.GourmetMenuScanMapper;
+import com.gourmetapi.dao.*;
 import com.gourmetapi.domain.*;
 import com.gourmetapi.domain.vo.PublishVo;
 import com.gourmetapi.service.MenuService;
@@ -12,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +28,9 @@ public class MenuServiceImpl implements MenuService {
 
     @Autowired
     private GourmetMaterialsMapper gourmetMaterialsMapper;
+
+    @Autowired
+    private GourmetStarMapper gourmetStarMapper;
 
 
     @Override
@@ -111,5 +113,72 @@ public class MenuServiceImpl implements MenuService {
 
         return i1 + i2 + i3 == publishVo.getMaterials().size() + 2;
 
+    }
+
+    @Override
+    public List<GourmetMenu> getMyStarMenuList(String nickName) {
+        List<GourmetMenu> result = new ArrayList<>();
+        // 查找收藏表中的数据
+        GourmetStarExample starExample = new GourmetStarExample();
+        GourmetStarExample.Criteria starExampleCriteria = starExample.createCriteria();
+        starExampleCriteria.andNickNameEqualTo(nickName.trim());
+        List<GourmetStarKey> keyList = gourmetStarMapper.selectByExample(starExample);
+
+        for (GourmetStarKey starKey : keyList) {
+            GourmetMenu menu = gourmetMenuMapper.selectByPrimaryKey(starKey.getMenuId());
+            // 查找浏览量和收藏数据
+            GourmetMenuScanExample scanExample = new GourmetMenuScanExample();
+            GourmetMenuScanExample.Criteria scanExampleCriteria = scanExample.createCriteria();
+            scanExampleCriteria.andMenuIdEqualTo(starKey.getMenuId());
+            List<GourmetMenuScan> scans = gourmetMenuScanMapper.selectByExample(scanExample);
+            menu.setPageviews(scans.get(0).getPageviews());
+            menu.setFavorites(scans.get(0).getFavorites());
+            result.add(menu);
+        }
+
+
+        return result;
+    }
+
+    @Override
+    public boolean deleteStar(String nickName, Integer menuId) {
+        GourmetStarExample example = new GourmetStarExample();
+        GourmetStarExample.Criteria criteria = example.createCriteria();
+        criteria.andNickNameEqualTo(nickName);
+        criteria.andMenuIdEqualTo(menuId);
+        int i = gourmetStarMapper.deleteByExample(example);
+        // 收藏数-1
+        GourmetMenuScanExample scanExample = new GourmetMenuScanExample();
+        GourmetMenuScanExample.Criteria scanExampleCriteria = scanExample.createCriteria();
+        scanExampleCriteria.andMenuIdEqualTo(menuId);
+        List<GourmetMenuScan> scans = gourmetMenuScanMapper.selectByExample(scanExample);
+        if(scans.size()>0){
+            GourmetMenuScan scan = scans.get(0);
+            scan.setFavorites(scan.getFavorites()-1);
+            gourmetMenuScanMapper.updateByPrimaryKey(scan);
+        }
+        return i>0;
+    }
+
+    @Override
+    public boolean insertStarMenu(String nickName, Integer menuId) {
+
+        GourmetStarKey starKey = new GourmetStarKey();
+        starKey.setNickName(nickName);
+        starKey.setMenuId(menuId);
+        int i = gourmetStarMapper.insert(starKey);
+        if(i>0){
+            GourmetMenuScanExample scanExample = new GourmetMenuScanExample();
+            GourmetMenuScanExample.Criteria criteria = scanExample.createCriteria();
+            criteria.andMenuIdEqualTo(menuId);
+            List<GourmetMenuScan> scans = gourmetMenuScanMapper.selectByExample(scanExample);
+            if(scans.size()>0){
+                GourmetMenuScan scan = scans.get(0);
+                scan.setFavorites(scan.getFavorites()+1);
+                int i1 = gourmetMenuScanMapper.updateByPrimaryKey(scan);
+                return i1 > 0;
+            }
+        }
+        return false;
     }
 }
