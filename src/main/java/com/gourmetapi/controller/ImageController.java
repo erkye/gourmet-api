@@ -43,7 +43,7 @@ public class ImageController {
             e.printStackTrace();
             return "error";
         }
-        return "http://"+getHostIp()+":3000/api/images/"+uuid+fileSuffix;
+        return "http://150.158.174.106:3000/api/images/"+uuid+fileSuffix;
     }
 
 
