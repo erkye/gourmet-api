@@ -28,6 +28,13 @@ public class ImageController {
     @Value("${user.filepath}")
     private String filePath;
 
+    @Value("${server.port}")
+    private String port;
+
+    private final String URL_PREFIX = "http://";
+
+    private final String URL_SUFFIX = "/api/images/";
+
 
 
     @RequestMapping(value = "/upload",method = RequestMethod.POST,consumes = "multipart/form-data")
@@ -43,7 +50,8 @@ public class ImageController {
             e.printStackTrace();
             return "error";
         }
-        return "http://150.158.174.106:3000/api/images/"+uuid+fileSuffix;
+        return URL_PREFIX + getHostIp() + ":" + this.port + URL_SUFFIX + uuid+fileSuffix;
+        //return "http://150.158.174.106:3000/api/images/"+uuid+fileSuffix;
     }
 
 
