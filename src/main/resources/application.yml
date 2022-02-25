@@ -7,7 +7,7 @@ spring:
     #数据库连接驱动
     driver-class-name: com.mysql.cj.jdbc.Driver
     #数据库连接url
-    url: jdbc:mysql://localhost:3306/gourmet?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+    url: jdbc:mysql://localhost:3306/gourmet?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
     #数据库连接账号
     username: root
     #数据库连接密码
@@ -71,4 +71,4 @@ pagehelper:
 
 # 自定义文件删除位置
 # user.filepath: /usr/local/src/gourmet-api-server/upload/
-user.filepath: E:/upload/
+user.filepath: /usr/local/src/gourmet-api-server/upload/
