@@ -5,7 +5,7 @@ import com.gourmetapi.domain.GourmetClassify;
 import com.gourmetapi.domain.GourmetClassifyExample;
 import com.gourmetapi.domain.vo.ClassifyMenuVo;
 import com.gourmetapi.service.ClassifyService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,10 +16,10 @@ import java.util.List;
  * @date 2020-10-16 - 20:46
  */
 @Service
+@AllArgsConstructor
 public class ClassifyServiceImpl implements ClassifyService {
 
-    @Autowired
-    private GourmetClassifyMapper gourmetClassifyMapper;
+    private final GourmetClassifyMapper gourmetClassifyMapper;
 
     @Override
     public List<ClassifyMenuVo> getClassifyMenu() {

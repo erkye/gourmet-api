@@ -2,7 +2,7 @@ package com.gourmetapi.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.gourmetapi.service.MenuService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api/search")
+@AllArgsConstructor
 public class SearchController {
 
-    @Autowired
-    private MenuService menuService;
+    private final MenuService menuService;
 
     @GetMapping("/query")
     public PageInfo searchMenu(String key, @RequestParam(defaultValue = "1")int pageNo, @RequestParam(defaultValue = "10")int pageSize){

@@ -9,7 +9,7 @@ import com.gourmetapi.dao.GourmetStarMapper;
 import com.gourmetapi.domain.*;
 import com.gourmetapi.domain.vo.PublishVo;
 import com.gourmetapi.service.MenuService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,19 +22,16 @@ import java.util.List;
  */
 @Service
 @Transactional
+@AllArgsConstructor
 public class MenuServiceImpl implements MenuService {
 
-    @Autowired
-    private GourmetMenuMapper gourmetMenuMapper;
+    private final GourmetMenuMapper gourmetMenuMapper;
 
-    @Autowired
-    private GourmetMenuScanMapper gourmetMenuScanMapper;
+    private final GourmetMenuScanMapper gourmetMenuScanMapper;
 
-    @Autowired
-    private GourmetMaterialsMapper gourmetMaterialsMapper;
+    private final GourmetMaterialsMapper gourmetMaterialsMapper;
 
-    @Autowired
-    private GourmetStarMapper gourmetStarMapper;
+    private final GourmetStarMapper gourmetStarMapper;
 
 
     @Override

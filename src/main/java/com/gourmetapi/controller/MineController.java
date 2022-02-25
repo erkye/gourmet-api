@@ -2,7 +2,7 @@ package com.gourmetapi.controller;
 
 import com.gourmetapi.domain.GourmetMenu;
 import com.gourmetapi.service.MenuService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,10 +16,10 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/mine")
+@AllArgsConstructor
 public class MineController {
 
-    @Autowired
-    private MenuService menuService;
+    private final MenuService menuService;
 
 
     /**

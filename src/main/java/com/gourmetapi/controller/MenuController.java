@@ -4,7 +4,7 @@ import com.gourmetapi.domain.GourmetMaterials;
 import com.gourmetapi.domain.GourmetMenu;
 import com.gourmetapi.domain.vo.PublishVo;
 import com.gourmetapi.service.MenuService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,10 +15,10 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/menu")
+@AllArgsConstructor
 public class MenuController {
 
-    @Autowired
-    private MenuService menuService;
+    private final MenuService menuService;
 
     /**
      * 根据菜谱的id查询菜谱
