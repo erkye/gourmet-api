@@ -68,7 +68,7 @@
   <sql id="Base_Column_List" >
     id, menu_id, pageviews, favorites
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gourmetapi.domain.GourmetMenuScanExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gourmetapi.domain.example.GourmetMenuScanExample" >
     select
     <if test="distinct" >
       distinct
@@ -92,7 +92,7 @@
     delete from gourmet_menu_scan
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.gourmetapi.domain.GourmetMenuScanExample" >
+  <delete id="deleteByExample" parameterType="com.gourmetapi.domain.example.GourmetMenuScanExample" >
     delete from gourmet_menu_scan
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.gourmetapi.domain.GourmetMenuScanExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.gourmetapi.domain.example.GourmetMenuScanExample" resultType="java.lang.Integer" >
     select count(*) from gourmet_menu_scan
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

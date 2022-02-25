@@ -76,7 +76,7 @@
   <sql id="Blob_Column_List" >
     content
   </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.gourmetapi.domain.GourmetMenuExample" >
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.gourmetapi.domain.example.GourmetMenuExample" >
     select
     <if test="distinct" >
       distinct
@@ -92,7 +92,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gourmetapi.domain.GourmetMenuExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gourmetapi.domain.example.GourmetMenuExample" >
     select
     <if test="distinct" >
       distinct
@@ -118,7 +118,7 @@
     delete from gourmet_menu
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.gourmetapi.domain.GourmetMenuExample" >
+  <delete id="deleteByExample" parameterType="com.gourmetapi.domain.example.GourmetMenuExample" >
     delete from gourmet_menu
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -184,7 +184,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.gourmetapi.domain.GourmetMenuExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.gourmetapi.domain.example.GourmetMenuExample" resultType="java.lang.Integer" >
     select count(*) from gourmet_menu
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

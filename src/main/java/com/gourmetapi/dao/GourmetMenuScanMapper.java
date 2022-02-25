@@ -1,7 +1,7 @@
 package com.gourmetapi.dao;
 
 import com.gourmetapi.domain.GourmetMenuScan;
-import com.gourmetapi.domain.GourmetMenuScanExample;
+import com.gourmetapi.domain.example.GourmetMenuScanExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

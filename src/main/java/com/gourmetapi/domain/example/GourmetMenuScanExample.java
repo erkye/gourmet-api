@@ -1,16 +1,16 @@
-package com.gourmetapi.domain;
+package com.gourmetapi.domain.example;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GourmetStarExample {
+public class GourmetMenuScanExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public GourmetStarExample() {
+    public GourmetMenuScanExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,73 +104,63 @@ public class GourmetStarExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andNickNameIsNull() {
-            addCriterion("nick_name is null");
+        public Criteria andIdIsNull() {
+            addCriterion("id is null");
             return (Criteria) this;
         }
 
-        public Criteria andNickNameIsNotNull() {
-            addCriterion("nick_name is not null");
+        public Criteria andIdIsNotNull() {
+            addCriterion("id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNickNameEqualTo(String value) {
-            addCriterion("nick_name =", value, "nickName");
+        public Criteria andIdEqualTo(Integer value) {
+            addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNickNameNotEqualTo(String value) {
-            addCriterion("nick_name <>", value, "nickName");
+        public Criteria andIdNotEqualTo(Integer value) {
+            addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNickNameGreaterThan(String value) {
-            addCriterion("nick_name >", value, "nickName");
+        public Criteria andIdGreaterThan(Integer value) {
+            addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNickNameGreaterThanOrEqualTo(String value) {
-            addCriterion("nick_name >=", value, "nickName");
+        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNickNameLessThan(String value) {
-            addCriterion("nick_name <", value, "nickName");
+        public Criteria andIdLessThan(Integer value) {
+            addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNickNameLessThanOrEqualTo(String value) {
-            addCriterion("nick_name <=", value, "nickName");
+        public Criteria andIdLessThanOrEqualTo(Integer value) {
+            addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNickNameLike(String value) {
-            addCriterion("nick_name like", value, "nickName");
+        public Criteria andIdIn(List<Integer> values) {
+            addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNickNameNotLike(String value) {
-            addCriterion("nick_name not like", value, "nickName");
+        public Criteria andIdNotIn(List<Integer> values) {
+            addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNickNameIn(List<String> values) {
-            addCriterion("nick_name in", values, "nickName");
+        public Criteria andIdBetween(Integer value1, Integer value2) {
+            addCriterion("id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andNickNameNotIn(List<String> values) {
-            addCriterion("nick_name not in", values, "nickName");
-            return (Criteria) this;
-        }
-
-        public Criteria andNickNameBetween(String value1, String value2) {
-            addCriterion("nick_name between", value1, value2, "nickName");
-            return (Criteria) this;
-        }
-
-        public Criteria andNickNameNotBetween(String value1, String value2) {
-            addCriterion("nick_name not between", value1, value2, "nickName");
+        public Criteria andIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
 
@@ -231,6 +221,126 @@ public class GourmetStarExample {
 
         public Criteria andMenuIdNotBetween(Integer value1, Integer value2) {
             addCriterion("menu_id not between", value1, value2, "menuId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsIsNull() {
+            addCriterion("pageviews is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsIsNotNull() {
+            addCriterion("pageviews is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsEqualTo(Long value) {
+            addCriterion("pageviews =", value, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsNotEqualTo(Long value) {
+            addCriterion("pageviews <>", value, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsGreaterThan(Long value) {
+            addCriterion("pageviews >", value, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsGreaterThanOrEqualTo(Long value) {
+            addCriterion("pageviews >=", value, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsLessThan(Long value) {
+            addCriterion("pageviews <", value, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsLessThanOrEqualTo(Long value) {
+            addCriterion("pageviews <=", value, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsIn(List<Long> values) {
+            addCriterion("pageviews in", values, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsNotIn(List<Long> values) {
+            addCriterion("pageviews not in", values, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsBetween(Long value1, Long value2) {
+            addCriterion("pageviews between", value1, value2, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andPageviewsNotBetween(Long value1, Long value2) {
+            addCriterion("pageviews not between", value1, value2, "pageviews");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavoritesIsNull() {
+            addCriterion("favorites is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavoritesIsNotNull() {
+            addCriterion("favorites is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavoritesEqualTo(Long value) {
+            addCriterion("favorites =", value, "favorites");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavoritesNotEqualTo(Long value) {
+            addCriterion("favorites <>", value, "favorites");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavoritesGreaterThan(Long value) {
+            addCriterion("favorites >", value, "favorites");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavoritesGreaterThanOrEqualTo(Long value) {
+            addCriterion("favorites >=", value, "favorites");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavoritesLessThan(Long value) {
+            addCriterion("favorites <", value, "favorites");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavoritesLessThanOrEqualTo(Long value) {
+            addCriterion("favorites <=", value, "favorites");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavoritesIn(List<Long> values) {
+            addCriterion("favorites in", values, "favorites");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavoritesNotIn(List<Long> values) {
+            addCriterion("favorites not in", values, "favorites");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavoritesBetween(Long value1, Long value2) {
+            addCriterion("favorites between", value1, value2, "favorites");
+            return (Criteria) this;
+        }
+
+        public Criteria andFavoritesNotBetween(Long value1, Long value2) {
+            addCriterion("favorites not between", value1, value2, "favorites");
             return (Criteria) this;
         }
     }

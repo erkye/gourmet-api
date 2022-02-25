@@ -1,6 +1,6 @@
 package com.gourmetapi.dao;
 
-import com.gourmetapi.domain.GourmetStarExample;
+import com.gourmetapi.domain.example.GourmetStarExample;
 import com.gourmetapi.domain.GourmetStarKey;
 import org.apache.ibatis.annotations.Param;
 

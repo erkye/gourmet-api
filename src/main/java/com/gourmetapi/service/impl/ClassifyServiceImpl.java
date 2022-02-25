@@ -2,7 +2,7 @@ package com.gourmetapi.service.impl;
 
 import com.gourmetapi.dao.GourmetClassifyMapper;
 import com.gourmetapi.domain.GourmetClassify;
-import com.gourmetapi.domain.GourmetClassifyExample;
+import com.gourmetapi.domain.example.GourmetClassifyExample;
 import com.gourmetapi.domain.vo.ClassifyMenuVo;
 import com.gourmetapi.service.ClassifyService;
 import lombok.AllArgsConstructor;

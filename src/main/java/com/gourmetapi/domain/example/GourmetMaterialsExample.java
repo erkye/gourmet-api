@@ -1,4 +1,4 @@
-package com.gourmetapi.domain;
+package com.gourmetapi.domain.example;
 
 import java.util.ArrayList;
 import java.util.List;

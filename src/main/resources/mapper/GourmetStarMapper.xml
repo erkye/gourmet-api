@@ -66,7 +66,7 @@
   <sql id="Base_Column_List" >
     nick_name, menu_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gourmetapi.domain.GourmetStarExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gourmetapi.domain.example.GourmetStarExample" >
     select
     <if test="distinct" >
       distinct
@@ -85,7 +85,7 @@
     where nick_name = #{nickName,jdbcType=VARCHAR}
       and menu_id = #{menuId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.gourmetapi.domain.GourmetStarExample" >
+  <delete id="deleteByExample" parameterType="com.gourmetapi.domain.example.GourmetStarExample" >
     delete from gourmet_star
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -114,7 +114,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.gourmetapi.domain.GourmetStarExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.gourmetapi.domain.example.GourmetStarExample" resultType="java.lang.Integer" >
     select count(*) from gourmet_star
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />

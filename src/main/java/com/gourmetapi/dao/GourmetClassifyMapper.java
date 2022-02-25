@@ -1,7 +1,7 @@
 package com.gourmetapi.dao;
 
 import com.gourmetapi.domain.GourmetClassify;
-import com.gourmetapi.domain.GourmetClassifyExample;
+import com.gourmetapi.domain.example.GourmetClassifyExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

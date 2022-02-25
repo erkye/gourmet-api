@@ -1,7 +1,7 @@
 package com.gourmetapi.dao;
 
 import com.gourmetapi.domain.GourmetMaterials;
-import com.gourmetapi.domain.GourmetMaterialsExample;
+import com.gourmetapi.domain.example.GourmetMaterialsExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
