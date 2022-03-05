@@ -3,26 +3,27 @@ package com.gourmetapi.controller.exception;
 import lombok.Getter;
 
 /**
- * @author 李发展
+ * 自定义接口错误返回体格式
+ * @author none
  * @date 2020-10-9 - 19:26
  *
  * 自定义异常
  */
 @Getter
-public class APIException extends RuntimeException {
+public class ApiException extends RuntimeException {
 
     private int code;
     private String msg;
 
-    public APIException(){
+    public ApiException(){
         this(1001,"接口错误");
     }
 
-    public APIException(String msg){
+    public ApiException(String msg){
         this(1001,msg);
     }
 
-    public APIException(int code,String msg){
+    public ApiException(int code, String msg){
         super(msg);
         this.code = code;
         this.msg = msg;

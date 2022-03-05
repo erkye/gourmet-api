@@ -1,8 +1,12 @@
-package com.gourmetapi.domain;
+package com.gourmetapi.pojo;
 
 import lombok.Builder;
 import lombok.Data;
 
+/**
+ *
+ * @author none
+ */
 @Data
 @Builder
 public class GourmetClassify {

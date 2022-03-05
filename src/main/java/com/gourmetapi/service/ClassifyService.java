@@ -1,6 +1,6 @@
 package com.gourmetapi.service;
 
-import com.gourmetapi.domain.vo.ClassifyMenuVo;
+import com.gourmetapi.pojo.vo.ClassifyMenuVo;
 
 import java.util.List;
 

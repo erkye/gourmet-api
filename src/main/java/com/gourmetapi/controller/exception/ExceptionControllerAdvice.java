@@ -1,14 +1,14 @@
 package com.gourmetapi.controller.exception;
 
-import com.gourmetapi.domain.result.ResultCode;
-import com.gourmetapi.domain.result.ResultVO;
+import com.gourmetapi.pojo.result.ResultCode;
+import com.gourmetapi.pojo.result.ResultVo;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * @author 李发展
+ * @author none
  * @date 2020-10-9 - 19:30
  *
  * 全局异常处理
@@ -16,16 +16,26 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
 
-    @ExceptionHandler(APIException.class)
-    public ResultVO<String> APIExceptionHandler(APIException e) {
+    /**
+     * 处理自定义异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(ApiException.class)
+    public ResultVo<String> apiExceptionHandler(ApiException e) {
         // 注意哦，这里传递的响应码枚举
-        return new ResultVO<>(ResultCode.FAILED, e.getMsg());
+        return new ResultVo<>(ResultCode.FAILED, e.getMsg());
     }
 
+    /**
+     * 处理校验异常
+     * @param e
+     * @return
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResultVO<String> MethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
+    public ResultVo<String> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
         ObjectError objectError = e.getBindingResult().getAllErrors().get(0);
         // 注意哦，这里传递的响应码枚举
-        return new ResultVO<>(ResultCode.VALIDATE_FAILED, objectError.getDefaultMessage());
+        return new ResultVo<>(ResultCode.VALIDATE_FAILED, objectError.getDefaultMessage());
     }
 }

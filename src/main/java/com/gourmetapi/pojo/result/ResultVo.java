@@ -1,15 +1,15 @@
-package com.gourmetapi.domain.result;
+package com.gourmetapi.pojo.result;
 
 import lombok.Getter;
 
 /**
- * @author 李发展
+ * @author none
  * @date 2020-10-9 - 19:33
  *
  * 自定义响应体
  */
 @Getter
-public class ResultVO<T> {
+public class ResultVo<T> {
 
     /**
      * 状态码，比如1000代表响应成功
@@ -24,11 +24,11 @@ public class ResultVO<T> {
      */
     private T data;
 
-    public ResultVO(T data) {
+    public ResultVo(T data) {
         this(ResultCode.SUCCESS, data);
     }
 
-    public ResultVO(ResultCode resultCode, T data) {
+    public ResultVo(ResultCode resultCode, T data) {
         this.code = resultCode.getCode();
         this.msg = resultCode.getMsg();
         this.data = data;

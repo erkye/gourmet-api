@@ -1,5 +1,6 @@
 package com.gourmetapi.controller;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,13 +17,14 @@ import java.util.Enumeration;
 import java.util.UUID;
 
 /**
- * @author 李发展
+ * @author none
  * @date 2020-10-23 - 15:30
  *
- * 图片相关的接口
+ * 文件相关的控制器层
  */
 @RestController
 @RequestMapping("/api/img")
+@Log4j2
 public class ImageController {
 
     @Value("${user.filepath}")
@@ -31,12 +33,17 @@ public class ImageController {
     @Value("${server.port}")
     private String port;
 
+    /** 拼接URL前缀部分 */
     private final String URL_PREFIX = "http://";
-
+    /** 拼接URL后缀部分 */
     private final String URL_SUFFIX = "/api/images/";
 
 
-
+    /**
+     * 上传图片接口
+     * @param multipartFile
+     * @return
+     */
     @RequestMapping(value = "/upload",method = RequestMethod.POST,consumes = "multipart/form-data")
     public String upload(@RequestPart("pic")MultipartFile multipartFile){
 
@@ -55,19 +62,22 @@ public class ImageController {
     }
 
 
+    /**
+     * 获取运行机器ip地址（非局域网）
+     * @return
+     */
     private static String getHostIp(){
         try{
             Enumeration<NetworkInterface> allNetInterfaces = NetworkInterface.getNetworkInterfaces();
             while (allNetInterfaces.hasMoreElements()){
-                NetworkInterface netInterface = (NetworkInterface) allNetInterfaces.nextElement();
+                NetworkInterface netInterface = allNetInterfaces.nextElement();
                 Enumeration<InetAddress> addresses = netInterface.getInetAddresses();
                 while (addresses.hasMoreElements()){
-                    InetAddress ip = (InetAddress) addresses.nextElement();
-                    if (ip != null
-                            && ip instanceof Inet4Address
+                    InetAddress ip = addresses.nextElement();
+                    if (ip instanceof Inet4Address
                             && !ip.isLoopbackAddress() //loopback地址即本机地址，IPv4的loopback范围是127.0.0.0 ~ 127.255.255.255
-                            && ip.getHostAddress().indexOf(":")==-1){
-                        //System.out.println("本机的IP = " + ip.getHostAddress());
+                            && !ip.getHostAddress().contains(":")){
+                        log.info("本机的IP = \" + ip.getHostAddress()");
                         return ip.getHostAddress();
                     }
                 }

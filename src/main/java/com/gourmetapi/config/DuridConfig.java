@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 /**
- * @author 李发展
+ * 阿里巴巴Druid数据库连接池相关配置
+ * @author none
  * @date 2020-10-8 - 20:40
  */
 @Configuration

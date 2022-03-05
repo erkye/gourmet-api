@@ -1,8 +1,9 @@
 package com.gourmetapi.controller;
 
-import com.gourmetapi.domain.vo.ClassifyMenuVo;
+import com.gourmetapi.pojo.vo.ClassifyMenuVo;
 import com.gourmetapi.service.ClassifyService;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,12 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * @author 李发展
+ * 样例控制层
+ * @author none
  * @date 2020-10-16 - 20:44
  */
 @RestController
 @RequestMapping("/api/classify")
 @AllArgsConstructor
+@Log4j2
 public class ClassifyController {
 
     private final ClassifyService classifyService;

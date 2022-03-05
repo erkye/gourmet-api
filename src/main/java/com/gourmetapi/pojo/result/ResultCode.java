@@ -1,4 +1,4 @@
-package com.gourmetapi.domain.result;
+package com.gourmetapi.pojo.result;
 
 import lombok.Getter;
 

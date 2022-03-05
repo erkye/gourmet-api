@@ -6,7 +6,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * @author 李发展
+ * Web相关配置
+ * @author none
  * @date 2020-10-23 - 16:15
  */
 @Configuration
@@ -15,6 +16,10 @@ public class CustomWebConfiguration implements WebMvcConfigurer {
     @Value("${user.filepath}")
     private String filePath;
 
+    /**
+     * 新增资源处理器映射
+     * @param registry
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/api/images/**")

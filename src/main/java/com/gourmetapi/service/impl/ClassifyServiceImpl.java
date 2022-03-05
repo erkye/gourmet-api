@@ -3,8 +3,8 @@ package com.gourmetapi.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.gourmetapi.dao.GourmetClassifyMapper;
-import com.gourmetapi.domain.GourmetClassify;
-import com.gourmetapi.domain.vo.ClassifyMenuVo;
+import com.gourmetapi.pojo.GourmetClassify;
+import com.gourmetapi.pojo.vo.ClassifyMenuVo;
 import com.gourmetapi.service.ClassifyService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,11 +28,12 @@ public class ClassifyServiceImpl implements ClassifyService {
         // 查询一级分类
         List<GourmetClassify> firstMenuList = selectByParentId(0);
         firstMenuList.forEach(gourmetClassify -> {
-            ClassifyMenuVo vo = new ClassifyMenuVo();
-            vo.setId(gourmetClassify.getId());
-            vo.setName(gourmetClassify.getName());
-            vo.setParentId(gourmetClassify.getParentId());
-            vo.setChilds(selectByParentId(gourmetClassify.getId()));
+            ClassifyMenuVo vo = ClassifyMenuVo.builder()
+                    .id(gourmetClassify.getId())
+                    .name(gourmetClassify.getName())
+                    .parentId(gourmetClassify.getParentId())
+                    .childs(selectByParentId(gourmetClassify.getId()))
+                    .build();
             result.add(vo);
         });
         return result;
