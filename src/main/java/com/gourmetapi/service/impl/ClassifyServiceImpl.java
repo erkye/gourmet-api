@@ -1,8 +1,9 @@
 package com.gourmetapi.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.gourmetapi.dao.GourmetClassifyMapper;
 import com.gourmetapi.domain.GourmetClassify;
-import com.gourmetapi.domain.example.GourmetClassifyExample;
 import com.gourmetapi.domain.vo.ClassifyMenuVo;
 import com.gourmetapi.service.ClassifyService;
 import lombok.AllArgsConstructor;
@@ -26,21 +27,20 @@ public class ClassifyServiceImpl implements ClassifyService {
         List<ClassifyMenuVo> result = new ArrayList<>();
         // 查询一级分类
         List<GourmetClassify> firstMenuList = selectByParentId(0);
-        for (GourmetClassify classify : firstMenuList) {
+        firstMenuList.forEach(gourmetClassify -> {
             ClassifyMenuVo vo = new ClassifyMenuVo();
-            vo.setId(classify.getId());
-            vo.setName(classify.getName());
-            vo.setParentId(classify.getParentId());
-            vo.setChilds(selectByParentId(classify.getId()));
+            vo.setId(gourmetClassify.getId());
+            vo.setName(gourmetClassify.getName());
+            vo.setParentId(gourmetClassify.getParentId());
+            vo.setChilds(selectByParentId(gourmetClassify.getId()));
             result.add(vo);
-        }
+        });
         return result;
     }
 
     private List<GourmetClassify> selectByParentId(int parentId){
-        GourmetClassifyExample example = new GourmetClassifyExample();
-        GourmetClassifyExample.Criteria criteria = example.createCriteria();
-        criteria.andParentIdEqualTo(parentId);
-        return gourmetClassifyMapper.selectByExample(example);
+        LambdaQueryWrapper<GourmetClassify> lambdaQuery = Wrappers.lambdaQuery();
+        lambdaQuery.eq(GourmetClassify::getParentId,parentId);
+        return gourmetClassifyMapper.selectList(lambdaQuery);
     }
 }

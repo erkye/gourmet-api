@@ -54,20 +54,20 @@ spring:
 server:
   # 后端api服务器端口
   port: 3000
-
-# ====================mybatis==============================
-mybatis:
-  #配置mybatis的mapper xml文件映射
-  mapper-locations: classpath*:mapper/*.xml
-  #配置pojo映射
-  type-aliases-package: com.gourmetapi.domain
-
-# pagehelper 分页插件配置
-pagehelper:
-  helper-dialect: mysql
-  reasonable: true
-  support-methods-arguments: true
-  params: countSql
+# Mybatis-plus
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  global-config:
+    # 逻辑删除配置
+    db-config:
+      # 删除前
+      logic-not-delete-value: 1
+      # 删除后
+      logic-delete-value: 0
 
 # 自定义文件删除位置
 # user.filepath: /usr/local/src/gourmet-api-server/upload/
