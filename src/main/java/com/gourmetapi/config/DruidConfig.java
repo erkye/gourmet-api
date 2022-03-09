@@ -13,7 +13,7 @@ import javax.sql.DataSource;
  * @date 2020-10-8 - 20:40
  */
 @Configuration
-public class DuridConfig {
+public class DruidConfig {
 
     /**
      * 配置Druid的Bean 读取yml配置中spring.datasource为前缀的配置
