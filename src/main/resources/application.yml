@@ -70,5 +70,11 @@ mybatis-plus:
       logic-delete-value: 0
 
 # 自定义文件删除位置
-# user.filepath: /usr/local/src/gourmet-api-server/upload/
-user.filepath: /usr/local/src/gourmet-api-server/upload/
+# user.file-path: /usr/local/src/gourmet-api-server/upload/
+user.file-path: /usr/local/src/gourmet-api-server/upload/
+# 资源访问url 匹配映射
+user.file-mapping-path: /api/images/**
+# 日志级别
+logging:
+  level:
+    root: debug
