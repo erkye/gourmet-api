@@ -1,5 +1,6 @@
-package com.gourmetapi.controller.exception;
+package com.gourmetapi.advice;
 
+import com.gourmetapi.exception.ApiException;
 import com.gourmetapi.pojo.result.ResultCode;
 import com.gourmetapi.pojo.result.ResultVo;
 import org.springframework.validation.ObjectError;

@@ -1,8 +1,8 @@
-package com.gourmetapi.controller.response;
+package com.gourmetapi.advice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gourmetapi.controller.exception.ApiException;
+import com.gourmetapi.exception.ApiException;
 import com.gourmetapi.pojo.result.ResultVo;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;

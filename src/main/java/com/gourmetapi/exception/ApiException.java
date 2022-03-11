@@ -1,4 +1,4 @@
-package com.gourmetapi.controller.exception;
+package com.gourmetapi.exception;
 
 import lombok.Getter;
 
