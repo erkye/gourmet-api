@@ -1,5 +1,6 @@
 package com.gourmetapi.controller;
 
+import com.gourmetapi.exception.ApiException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,8 +55,8 @@ public class ImageController {
         try {
             multipartFile.transferTo(file);
         } catch (IOException e) {
-            e.printStackTrace();
-            return "error";
+            log.error(e);
+            throw new ApiException("文件上传失败！");
         }
         return URL_PREFIX + getHostIp() + ":" + this.port + URL_SUFFIX + uuid+fileSuffix;
         //return "http://150.158.174.106:3000/api/images/"+uuid+fileSuffix;
