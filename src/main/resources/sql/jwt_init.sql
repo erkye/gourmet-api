@@ -46,7 +46,7 @@ CREATE TABLE `base_permission` (
 `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '权限名称',
 `intro` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '权限介绍',
 `category` char(3) DEFAULT NULL COMMENT '权限类别',
-`uri` bigint(20) DEFAULT NULL COMMENT 'URL规则',
+`uri` varchar(32) DEFAULT NULL COMMENT 'URL规则',
 `create_time` datetime DEFAULT NULL COMMENT '创建时间',
 `creator` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '创建人',
 `update_time` datetime DEFAULT NULL COMMENT '修改时间',
