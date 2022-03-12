@@ -11,11 +11,17 @@ import lombok.Getter;
 @Getter
 public enum ResultCode {
 
+    /** 成功响应 */
     SUCCESS(1000, "操作成功"),
+    /** 通用失败响应 */
     FAILED(1001, "响应失败"),
+    /** 校验参数失败响应 */
     VALIDATE_FAILED(1002, "参数校验失败"),
+    /** 权限不足响应 */
     PERMISSIONS_INSUFFICIENT(1003,"权限不足"),
+    /** 认证失败响应响应 */
     AUTH_INVALID(1004,"认证信息失效"),
+    /** 未知异常响应 */
     ERROR(5000, "未知错误");
 
     private int code;
