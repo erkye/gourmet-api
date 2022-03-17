@@ -1,15 +1,13 @@
 package com.gourmetapi.filter;
 
-import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
-import com.gourmetapi.pojo.entity.Permission;
-import com.gourmetapi.pojo.vo.UserPermissionVo;
 import com.gourmetapi.service.UserService;
 import com.gourmetapi.utils.JwtUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -18,9 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Collection;
 
 /**
  * TODO
@@ -45,21 +41,15 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
             String tokenStr = request.getHeader("token");
             if (StrUtil.isNotBlank(tokenStr)) {
-                String tokenObj = JwtUtil.getJwtTokenClaimValue(tokenStr);
-                if (StrUtil.isNotBlank(tokenObj)) {
-                    UserPermissionVo userPermissionVo = userService.getByUserName(tokenObj);
-                    if(userPermissionVo != null){
-                        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-                        List<Permission> permissionList = userPermissionVo.getPermissionList();
-                        if(CollectionUtil.isNotEmpty(permissionList)){
-                            authorities = permissionList.stream()
-                                    .map(Permission::getCode)
-                                    .map(SimpleGrantedAuthority::new)
-                                    .collect(Collectors.toList());
-                        }
+                String openCode = JwtUtil.getJwtTokenClaimValue(tokenStr);
+                if (StrUtil.isNotBlank(openCode)) {
+                    UserDetails myUserDetails = userService.getByOpenCode(openCode);
+                    if(myUserDetails != null){
+                        Collection<? extends GrantedAuthority> authorities = myUserDetails.getAuthorities();
+
                         //设置当前上下文的认证信息
-                        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(tokenObj, "", authorities);
-                        authenticationToken.setDetails(userPermissionVo);
+                        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(openCode, "", authorities);
+                        authenticationToken.setDetails(myUserDetails);
                         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                     }
                 }

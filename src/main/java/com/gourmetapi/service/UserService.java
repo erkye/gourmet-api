@@ -1,6 +1,6 @@
 package com.gourmetapi.service;
 
-import com.gourmetapi.pojo.vo.UserPermissionVo;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * 用户Service
@@ -11,11 +11,11 @@ import com.gourmetapi.pojo.vo.UserPermissionVo;
 public interface UserService {
 
     /**
-     * 根据用户名获取用户权限信息
+     * 根据openCode获取用户权限信息
      * @param userName
      * @return
      */
-    UserPermissionVo getByUserName(String userName);
+    UserDetails getByOpenCode(String userName);
 
     /**
      * 根据账号和密码生成Token
