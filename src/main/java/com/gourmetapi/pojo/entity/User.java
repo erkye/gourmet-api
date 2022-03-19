@@ -22,8 +22,8 @@ public class User implements Serializable {
 
   private static final long serialVersionUID = -5063610786512520995L;
   @TableId(type = IdType.ASSIGN_ID)
-  private long id;
-  private long state;
+  private Long id;
+  private Long state;
   private String name;
   private String headImgUrl;
   private String mobile;

@@ -1,6 +1,7 @@
 package com.gourmetapi.pojo.enums;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 /**
  * 文件上传状态枚举值
@@ -9,6 +10,7 @@ import lombok.AllArgsConstructor;
  * @since 2022/3/19 10:44 AM
  */
 @AllArgsConstructor
+@Getter
 public enum EnumFileUploadStatus {
 
     UPLOADING("001","上传中"),

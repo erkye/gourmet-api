@@ -22,8 +22,8 @@ public class Role implements Serializable {
 
   private static final long serialVersionUID = -3749118595275079637L;
   @TableId(type = IdType.ASSIGN_ID)
-  private long id;
-  private long parentId;
+  private Long id;
+  private Long parentId;
   private String code;
   private String name;
   private String intro;

@@ -22,13 +22,13 @@ public class Permission implements Serializable {
 
   private static final long serialVersionUID = -7592975062124977084L;
   @TableId(type = IdType.ASSIGN_ID)
-  private long id;
-  private long parentId;
+  private Long id;
+  private Long parentId;
   private String code;
   private String name;
   private String intro;
   private String category;
-  private long uri;
+  private Long uri;
   private Date createTime;
   private String creator;
   private Date updateTime;

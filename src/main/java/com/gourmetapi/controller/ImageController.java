@@ -1,8 +1,15 @@
 package com.gourmetapi.controller;
 
+import cn.hutool.core.date.DateUtil;
 import com.gourmetapi.exception.ApiException;
-import lombok.extern.log4j.Log4j2;
+import com.gourmetapi.pojo.entity.FileUploadRecord;
+import com.gourmetapi.pojo.enums.EnumFileUploadStatus;
+import com.gourmetapi.pojo.vo.MyUserDetails;
+import com.gourmetapi.service.FileUploadService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -26,7 +33,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("/api/img")
-@Log4j2
+@Slf4j
 public class ImageController {
 
     @Value("${user.filepath}")
@@ -34,6 +41,9 @@ public class ImageController {
 
     @Value("${server.port}")
     private String port;
+
+    @Autowired
+    private FileUploadService fileUploadService;
 
     /** 拼接URL前缀部分 */
     private final String URL_PREFIX = "http://";
@@ -48,19 +58,38 @@ public class ImageController {
      */
     @RequestMapping(value = "/upload",method = RequestMethod.POST,consumes = "multipart/form-data")
     public String upload(@RequestPart("pic")MultipartFile multipartFile){
-
+        MyUserDetails details = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
         UUID uuid = UUID.randomUUID();
         String originalFileName = multipartFile.getOriginalFilename();
         String fileSuffix = Objects.requireNonNull(originalFileName).substring(originalFileName.lastIndexOf('.'));
-        File file = new File(filePath + uuid + fileSuffix);
+        long fileSize = multipartFile.getSize();
+        String freshFilePath = filePath + uuid + fileSuffix;
+        // 文件上传记录
+        FileUploadRecord record = fileUploadService.insertOne(FileUploadRecord.builder()
+                .userId(details.getUser().getId())
+                .originFileName(originalFileName)
+                .fileSize(fileSize)
+                .fileType(fileSuffix)
+                .freshFileName(uuid.toString())
+                .freshFilePath(freshFilePath)
+                .status(EnumFileUploadStatus.UPLOADING.getCode())
+                .createTime(DateUtil.date())
+                .updateTime(DateUtil.date())
+                .build());
+
+        File file = new File(freshFilePath);
         try {
             multipartFile.transferTo(file);
         } catch (IOException e) {
-            log.error(e);
+            // 修改状态为失败
+            fileUploadService.updateStatus(record.getId(), EnumFileUploadStatus.FAIL.getCode());
             throw new ApiException("文件上传失败！");
         }
-        return URL_PREFIX + getHostIp() + ":" + this.port + URL_SUFFIX + uuid+fileSuffix;
-        //return "http://150.158.174.106:3000/api/images/"+uuid+fileSuffix;
+        String url = URL_PREFIX + getHostIp() + ":" + this.port + URL_SUFFIX + uuid+fileSuffix;
+        record.setStatus(EnumFileUploadStatus.SUCCESS.getCode());
+        record.setUrl(url);
+        fileUploadService.updateOne(record);
+        return url;
     }
 
 

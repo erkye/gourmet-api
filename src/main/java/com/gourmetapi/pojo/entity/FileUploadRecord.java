@@ -26,9 +26,9 @@ public class FileUploadRecord implements Serializable {
 
     private static final long serialVersionUID = 2603989395273017194L;
     @TableId(type = IdType.ASSIGN_ID)
-    private long id;
+    private Long id;
     /** 用户id */
-    private long userId;
+    private Long userId;
     /** 源文件名称 */
     private String originFileName;
     /** 文件类型 */
@@ -42,7 +42,7 @@ public class FileUploadRecord implements Serializable {
     /** 上传url */
     private String url;
     /** 文件大小 */
-    private int fileSize;
+    private Long fileSize;
 
     private Date createTime;
     private Date updateTime;

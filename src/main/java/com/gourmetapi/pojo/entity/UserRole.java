@@ -22,9 +22,9 @@ public class UserRole implements Serializable {
 
   private static final long serialVersionUID = -8386586711516559877L;
   @TableId(type = IdType.ASSIGN_ID)
-  private long id;
-  private long userId;
-  private long roleId;
+  private Long id;
+  private Long userId;
+  private Long roleId;
   private Date createTime;
   private String creator;
   private Date updateTime;

@@ -25,9 +25,9 @@ public class Account implements Serializable {
    * 账号ID
    */
   @TableId(type = IdType.ASSIGN_ID)
-  private long id;
+  private Long id;
   /** 用户ID */
-  private long userId;
+  private Long userId;
   /** 登录账号,如手机号等 */
   private String openCode;
   private String category;
