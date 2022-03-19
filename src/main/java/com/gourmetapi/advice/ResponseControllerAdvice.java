@@ -3,7 +3,7 @@ package com.gourmetapi.advice;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gourmetapi.exception.ApiException;
-import com.gourmetapi.pojo.result.ResultVo;
+import com.gourmetapi.model.result.ResultVo;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;

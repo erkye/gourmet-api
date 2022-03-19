@@ -1,4 +1,4 @@
-package com.gourmetapi.pojo.entity;
+package com.gourmetapi.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -18,7 +18,7 @@ import java.util.Date;
 @Data
 @Builder
 @TableName("base_user")
-public class User implements Serializable {
+public class UserEntity implements Serializable {
 
   private static final long serialVersionUID = -5063610786512520995L;
   @TableId(type = IdType.ASSIGN_ID)

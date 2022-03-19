@@ -4,8 +4,8 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.gourmetapi.dao.*;
-import com.gourmetapi.pojo.entity.*;
-import com.gourmetapi.pojo.vo.MyUserDetails;
+import com.gourmetapi.model.entity.*;
+import com.gourmetapi.model.vo.MyUserDetails;
 import com.gourmetapi.service.UserService;
 import com.gourmetapi.utils.JwtUtil;
 import lombok.AllArgsConstructor;
@@ -43,16 +43,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails getByOpenCode(String openCode) {
 
-        Optional<Account> accountOptional = Optional.ofNullable(accountMapper.selectOne(Wrappers.lambdaQuery(Account.class)
-                .eq(Account::getOpenCode, openCode)));
+        Optional<AccountEntity> accountOptional = Optional.ofNullable(accountMapper.selectOne(Wrappers.lambdaQuery(AccountEntity.class)
+                .eq(AccountEntity::getOpenCode, openCode)));
         if(accountOptional.isPresent()){
-            Account account = accountOptional.get();
-            List<Role> roleList = new ArrayList<>();
-            List<Permission> permissionList = new ArrayList<>();
+            AccountEntity accountEntity = accountOptional.get();
+            List<RoleEntity> roleEntityList = new ArrayList<>();
+            List<PermissionEntity> permissionEntityList = new ArrayList<>();
             // 查询用户
-            Optional<User> userOptional = Optional.ofNullable(userMapper.selectById(account.getUserId()));
+            Optional<UserEntity> userOptional = Optional.ofNullable(userMapper.selectById(accountEntity.getUserId()));
             if(userOptional.isPresent()){
-                User user = userOptional.get();
+                UserEntity user = userOptional.get();
                 // 查询角色
                 List<UserRole> userRoleList = userRoleMapper.selectList(
                         Wrappers.<UserRole>lambdaQuery()
@@ -62,25 +62,25 @@ public class UserServiceImpl implements UserService {
                     List<Long> roleIdQueryList = userRoleList.stream()
                             .map(UserRole::getRoleId)
                             .collect(Collectors.toList());
-                    roleList = roleMapper.selectBatchIds(roleIdQueryList);
+                    roleEntityList = roleMapper.selectBatchIds(roleIdQueryList);
                     // 查询权限
-                    List<Long> roleIdList = roleList.stream()
-                            .map(Role::getId)
+                    List<Long> roleIdList = roleEntityList.stream()
+                            .map(RoleEntity::getId)
                             .collect(Collectors.toList());
                     if(CollectionUtil.isNotEmpty(roleIdList)){
-                        List<RolePermission> rolePermissionList = rolePermissionMapper.selectBatchIds(roleIdList);
-                        List<Long> permissionIdList = rolePermissionList.stream()
-                                .map(RolePermission::getPermissionId)
+                        List<RolePermissionEntity> rolePermissionEntityList = rolePermissionMapper.selectBatchIds(roleIdList);
+                        List<Long> permissionIdList = rolePermissionEntityList.stream()
+                                .map(RolePermissionEntity::getPermissionId)
                                 .collect(Collectors.toList());
-                        permissionList = permissionMapper.selectBatchIds(permissionIdList);
+                        permissionEntityList = permissionMapper.selectBatchIds(permissionIdList);
                     }
                 }
 
                 return MyUserDetails.builder()
-                        .account(account)
-                        .user(user)
-                        .roleList(roleList)
-                        .permissionList(permissionList)
+                        .accountEntity(accountEntity)
+                        .userEntity(user)
+                        .roleEntityList(roleEntityList)
+                        .permissionEntityList(permissionEntityList)
                         .build();
             }
         }
@@ -91,10 +91,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(String openCode, String password) {
-        Account account = accountMapper.selectOne(Wrappers.lambdaQuery(Account.class)
-                .eq(Account::getOpenCode, openCode));
-        if(account != null){
-            User user = userMapper.selectById(account.getUserId());
+        AccountEntity accountEntity = accountMapper.selectOne(Wrappers.lambdaQuery(AccountEntity.class)
+                .eq(AccountEntity::getOpenCode, openCode));
+        if(accountEntity != null){
+            UserEntity user = userMapper.selectById(accountEntity.getUserId());
             if(StringUtils.equals(password,user.getPassword())){
                 return JwtUtil.createJwtToken(openCode);
             }

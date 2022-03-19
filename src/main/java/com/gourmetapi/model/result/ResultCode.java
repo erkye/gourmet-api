@@ -1,4 +1,4 @@
-package com.gourmetapi.pojo.result;
+package com.gourmetapi.model.result;
 
 import lombok.Getter;
 

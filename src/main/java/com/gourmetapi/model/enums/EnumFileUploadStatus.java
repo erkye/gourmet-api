@@ -1,4 +1,4 @@
-package com.gourmetapi.pojo.enums;
+package com.gourmetapi.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

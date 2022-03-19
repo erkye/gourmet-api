@@ -2,9 +2,9 @@ package com.gourmetapi.controller;
 
 import cn.hutool.core.date.DateUtil;
 import com.gourmetapi.exception.ApiException;
-import com.gourmetapi.pojo.entity.FileUploadRecord;
-import com.gourmetapi.pojo.enums.EnumFileUploadStatus;
-import com.gourmetapi.pojo.vo.MyUserDetails;
+import com.gourmetapi.model.entity.FileUploadRecordEntity;
+import com.gourmetapi.model.enums.EnumFileUploadStatus;
+import com.gourmetapi.model.vo.MyUserDetails;
 import com.gourmetapi.service.FileUploadService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,8 +65,8 @@ public class ImageController {
         long fileSize = multipartFile.getSize();
         String freshFilePath = filePath + uuid + fileSuffix;
         // 文件上传记录
-        FileUploadRecord record = fileUploadService.insertOne(FileUploadRecord.builder()
-                .userId(details.getUser().getId())
+        FileUploadRecordEntity record = fileUploadService.insertOne(FileUploadRecordEntity.builder()
+                .userId(details.getUserEntity().getId())
                 .originFileName(originalFileName)
                 .fileSize(fileSize)
                 .fileType(fileSuffix)

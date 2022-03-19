@@ -1,7 +1,7 @@
 package com.gourmetapi.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.gourmetapi.pojo.entity.UserRole;
+import com.gourmetapi.model.entity.UserRole;
 
 /**
  * 用户-角色表Mapper

@@ -1,6 +1,6 @@
 package com.gourmetapi.controller;
 
-import com.gourmetapi.pojo.parameters.UserLoginRequest;
+import com.gourmetapi.model.parameters.UserLoginRequest;
 import com.gourmetapi.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

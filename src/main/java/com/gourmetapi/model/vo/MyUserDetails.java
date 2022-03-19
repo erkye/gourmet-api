@@ -1,9 +1,9 @@
-package com.gourmetapi.pojo.vo;
+package com.gourmetapi.model.vo;
 
-import com.gourmetapi.pojo.entity.Account;
-import com.gourmetapi.pojo.entity.Permission;
-import com.gourmetapi.pojo.entity.Role;
-import com.gourmetapi.pojo.entity.User;
+import com.gourmetapi.model.entity.AccountEntity;
+import com.gourmetapi.model.entity.PermissionEntity;
+import com.gourmetapi.model.entity.RoleEntity;
+import com.gourmetapi.model.entity.UserEntity;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,31 +26,31 @@ import java.util.stream.Collectors;
 public class MyUserDetails implements Serializable, UserDetails {
 
     private static final long serialVersionUID = 2538295935813906794L;
-    private User user;
+    private UserEntity userEntity;
 
-    private Account account;
+    private AccountEntity accountEntity;
 
-    private List<Role> roleList;
+    private List<RoleEntity> roleEntityList;
 
-    private List<Permission> permissionList;
+    private List<PermissionEntity> permissionEntityList;
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return permissionList.stream()
-                .map(Permission::getCode)
+        return permissionEntityList.stream()
+                .map(PermissionEntity::getCode)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return userEntity.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return account.getOpenCode();
+        return accountEntity.getOpenCode();
     }
 
     @Override
@@ -70,6 +70,6 @@ public class MyUserDetails implements Serializable, UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return !account.isDeleted() && !user.isDeleted();
+        return !accountEntity.isDeleted() && !userEntity.isDeleted();
     }
 }

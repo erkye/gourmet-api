@@ -1,6 +1,6 @@
 package com.gourmetapi.service;
 
-import com.gourmetapi.pojo.entity.FileUploadRecord;
+import com.gourmetapi.model.entity.FileUploadRecordEntity;
 
 /**
  * 文件上传service
@@ -16,21 +16,21 @@ public interface FileUploadService {
      * @param record
      * @return
      */
-    FileUploadRecord insertOne(FileUploadRecord record);
+    FileUploadRecordEntity insertOne(FileUploadRecordEntity record);
 
     /**
      * 修改
      * @param record
      * @return
      */
-    FileUploadRecord updateOne(FileUploadRecord record);
+    FileUploadRecordEntity updateOne(FileUploadRecordEntity record);
 
     /**
      * 根据id查询
      * @param id
      * @return
      */
-    FileUploadRecord selectById(long id);
+    FileUploadRecordEntity selectById(long id);
 
     /**
      * 根据id修改状态
@@ -38,5 +38,5 @@ public interface FileUploadService {
      * @param status
      * @return
      */
-    FileUploadRecord updateStatus(long id,String status);
+    FileUploadRecordEntity updateStatus(long id, String status);
 }

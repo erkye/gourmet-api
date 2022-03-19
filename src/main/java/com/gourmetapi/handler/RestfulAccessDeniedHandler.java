@@ -1,8 +1,8 @@
 package com.gourmetapi.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.gourmetapi.pojo.result.ResultCode;
-import com.gourmetapi.pojo.result.ResultVo;
+import com.gourmetapi.model.result.ResultCode;
+import com.gourmetapi.model.result.ResultVo;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;

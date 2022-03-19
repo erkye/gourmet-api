@@ -1,4 +1,4 @@
-package com.gourmetapi.pojo.entity;
+package com.gourmetapi.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -10,21 +10,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 角色-权限表
+ * 角色表
  *
  * @author none
  * @since 2022/3/11 3:45 PM
  */
 @Data
 @Builder
-@TableName("base_role_permission")
-public class RolePermission implements Serializable {
+@TableName("base_role")
+public class RoleEntity implements Serializable {
 
-  private static final long serialVersionUID = -3134772970707551716L;
+  private static final long serialVersionUID = -3749118595275079637L;
   @TableId(type = IdType.ASSIGN_ID)
   private Long id;
-  private Long roleId;
-  private Long permissionId;
+  private Long parentId;
+  private String code;
+  private String name;
+  private String intro;
   private Date createTime;
   private String creator;
   private Date updateTime;

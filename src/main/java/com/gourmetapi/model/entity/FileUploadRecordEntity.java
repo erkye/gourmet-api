@@ -1,4 +1,4 @@
-package com.gourmetapi.pojo.entity;
+package com.gourmetapi.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -22,7 +22,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @TableName("base_file_upload_record")
-public class FileUploadRecord implements Serializable {
+public class FileUploadRecordEntity implements Serializable {
 
     private static final long serialVersionUID = 2603989395273017194L;
     @TableId(type = IdType.ASSIGN_ID)

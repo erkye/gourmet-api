@@ -1,7 +1,7 @@
 package com.gourmetapi.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.gourmetapi.pojo.entity.Account;
+import com.gourmetapi.model.entity.AccountEntity;
 
 /**
  * 账号表Mapper
@@ -9,5 +9,5 @@ import com.gourmetapi.pojo.entity.Account;
  * @author lfz
  * @since 2022/3/12 10:07 AM
  */
-public interface AccountMapper extends BaseMapper<Account> {
+public interface AccountMapper extends BaseMapper<AccountEntity> {
 }

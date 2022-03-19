@@ -1,7 +1,7 @@
 package com.gourmetapi.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.gourmetapi.pojo.entity.Permission;
+import com.gourmetapi.model.entity.PermissionEntity;
 
 /**
  * 权限表Mapper
@@ -9,5 +9,5 @@ import com.gourmetapi.pojo.entity.Permission;
  * @author lfz
  * @since 2022/3/12 10:08 AM
  */
-public interface PermissionMapper extends BaseMapper<Permission> {
+public interface PermissionMapper extends BaseMapper<PermissionEntity> {
 }

@@ -1,4 +1,4 @@
-package com.gourmetapi.pojo.parameters;
+package com.gourmetapi.model.parameters;
 
 import lombok.Data;
 

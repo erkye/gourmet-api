@@ -1,8 +1,8 @@
 package com.gourmetapi.advice;
 
 import com.gourmetapi.exception.ApiException;
-import com.gourmetapi.pojo.result.ResultCode;
-import com.gourmetapi.pojo.result.ResultVo;
+import com.gourmetapi.model.result.ResultCode;
+import com.gourmetapi.model.result.ResultVo;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
