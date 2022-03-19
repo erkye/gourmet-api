@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(4);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/v2/api-docs/**").permitAll()
                 .and()
                 //允许登录接口、注册接口访问
-                .authorizeRequests().antMatchers("/admin/login", "/admin/register").permitAll()
+                .authorizeRequests().antMatchers("/user/login", "/user/register").permitAll()
                 .and()
                 //配置跨域的option请求，跨域请求之前都会进行一次option请求
                 .authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll()

@@ -24,7 +24,7 @@ public class Account implements Serializable {
   /**
    * 账号ID
    */
-  @TableId(type = IdType.AUTO)
+  @TableId(type = IdType.ASSIGN_ID)
   private long id;
   /** 用户ID */
   private long userId;

@@ -15,6 +15,7 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -50,7 +51,7 @@ public class ImageController {
 
         UUID uuid = UUID.randomUUID();
         String originalFileName = multipartFile.getOriginalFilename();
-        String fileSuffix = originalFileName.substring(originalFileName.lastIndexOf('.'));
+        String fileSuffix = Objects.requireNonNull(originalFileName).substring(originalFileName.lastIndexOf('.'));
         File file = new File(filePath + uuid + fileSuffix);
         try {
             multipartFile.transferTo(file);

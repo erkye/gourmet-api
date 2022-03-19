@@ -21,7 +21,7 @@ import java.util.Date;
 public class Role implements Serializable {
 
   private static final long serialVersionUID = -3749118595275079637L;
-  @TableId(type = IdType.AUTO)
+  @TableId(type = IdType.ASSIGN_ID)
   private long id;
   private long parentId;
   private String code;

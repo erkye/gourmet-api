@@ -1,5 +1,6 @@
 package com.gourmetapi.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.gourmetapi.dao.*;
@@ -11,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -45,6 +47,8 @@ public class UserServiceImpl implements UserService {
                 .eq(Account::getOpenCode, openCode)));
         if(accountOptional.isPresent()){
             Account account = accountOptional.get();
+            List<Role> roleList = new ArrayList<>();
+            List<Permission> permissionList = new ArrayList<>();
             // 查询用户
             Optional<User> userOptional = Optional.ofNullable(userMapper.selectById(account.getUserId()));
             if(userOptional.isPresent()){
@@ -54,20 +58,23 @@ public class UserServiceImpl implements UserService {
                         Wrappers.<UserRole>lambdaQuery()
                                 .eq(UserRole::getUserId, user.getId())
                 );
-                List<Long> roleIdQueryList = userRoleList.stream()
-                        .map(UserRole::getRoleId)
-                        .collect(Collectors.toList());
-                List<Role> roleList = roleMapper.selectBatchIds(roleIdQueryList);
-
-                // 查询权限
-                List<Long> roleIdList = roleList.stream()
-                        .map(Role::getId)
-                        .collect(Collectors.toList());
-                List<RolePermission> rolePermissionList = rolePermissionMapper.selectBatchIds(roleIdList);
-                List<Long> permissionIdList = rolePermissionList.stream()
-                        .map(RolePermission::getPermissionId)
-                        .collect(Collectors.toList());
-                List<Permission> permissionList = permissionMapper.selectBatchIds(permissionIdList);
+                if(CollectionUtil.isNotEmpty(userRoleList)){
+                    List<Long> roleIdQueryList = userRoleList.stream()
+                            .map(UserRole::getRoleId)
+                            .collect(Collectors.toList());
+                    roleList = roleMapper.selectBatchIds(roleIdQueryList);
+                    // 查询权限
+                    List<Long> roleIdList = roleList.stream()
+                            .map(Role::getId)
+                            .collect(Collectors.toList());
+                    if(CollectionUtil.isNotEmpty(roleIdList)){
+                        List<RolePermission> rolePermissionList = rolePermissionMapper.selectBatchIds(roleIdList);
+                        List<Long> permissionIdList = rolePermissionList.stream()
+                                .map(RolePermission::getPermissionId)
+                                .collect(Collectors.toList());
+                        permissionList = permissionMapper.selectBatchIds(permissionIdList);
+                    }
+                }
 
                 return MyUserDetails.builder()
                         .account(account)

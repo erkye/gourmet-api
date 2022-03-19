@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.gourmetapi.service.UserService;
 import com.gourmetapi.utils.JwtUtil;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,6 +27,7 @@ import java.util.Collection;
  */
 @Component
 @AllArgsConstructor
+@Slf4j
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     private final UserService userService;

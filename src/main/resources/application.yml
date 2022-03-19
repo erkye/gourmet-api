@@ -53,7 +53,7 @@ spring:
 
 server:
   # 后端api服务器端口
-  port: 3000
+  port: 8080
 # Mybatis-plus
 mybatis-plus:
   configuration:
@@ -71,7 +71,7 @@ mybatis-plus:
 
 # 自定义文件删除位置
 # user.file-path: /usr/local/src/gourmet-api-server/upload/
-user.file-path: /usr/local/src/gourmet-api-server/upload/
+user.file-path: /Users/lifazhan/Desktop/
 # 资源访问url 匹配映射
 user.file-mapping-path: /api/images/**
 # 日志级别
