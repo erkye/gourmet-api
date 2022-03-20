@@ -1,7 +1,7 @@
 package com.gourmetapi.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.gourmetapi.model.result.ResultCode;
+import com.gourmetapi.model.enums.EnumResultCode;
 import com.gourmetapi.model.result.ResultVo;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -26,7 +26,7 @@ public class RestfulAccessDeniedHandler implements AccessDeniedHandler {
         response.setContentType("application/json");
         response.setStatus(200);
         // 权限不足
-        ResultVo<?> resultVo = new ResultVo<>(ResultCode.PERMISSIONS_INSUFFICIENT,null);
+        ResultVo<?> resultVo = new ResultVo<>(EnumResultCode.PERMISSIONS_INSUFFICIENT,null);
         response.getWriter().println(JSON.toJSONString(resultVo));
         response.getWriter().flush();
     }

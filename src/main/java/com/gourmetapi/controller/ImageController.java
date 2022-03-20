@@ -57,7 +57,7 @@ public class ImageController {
      * @return
      */
     @RequestMapping(value = "/upload",method = RequestMethod.POST,consumes = "multipart/form-data")
-    public String upload(@RequestPart("pic")MultipartFile multipartFile){
+    public String upload(@RequestPart("file")MultipartFile multipartFile){
         MyUserDetails details = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getDetails();
         UUID uuid = UUID.randomUUID();
         String originalFileName = multipartFile.getOriginalFilename();

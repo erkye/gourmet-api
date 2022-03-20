@@ -1,5 +1,6 @@
-package com.gourmetapi.model.result;
+package com.gourmetapi.model.enums;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -9,7 +10,8 @@ import lombok.Getter;
  * 响应码枚举类
  */
 @Getter
-public enum ResultCode {
+@AllArgsConstructor
+public enum EnumResultCode {
 
     /** 成功响应 */
     SUCCESS(1000, "操作成功"),
@@ -27,8 +29,4 @@ public enum ResultCode {
     private int code;
     private String msg;
 
-    ResultCode(int code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
 }

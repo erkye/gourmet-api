@@ -1,7 +1,7 @@
 package com.gourmetapi.advice;
 
 import com.gourmetapi.exception.ApiException;
-import com.gourmetapi.model.result.ResultCode;
+import com.gourmetapi.model.enums.EnumResultCode;
 import com.gourmetapi.model.result.ResultVo;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -25,7 +25,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(ApiException.class)
     public ResultVo<String> apiExceptionHandler(ApiException e) {
         // 注意哦，这里传递的响应码枚举
-        return new ResultVo<>(ResultCode.FAILED, e.getMsg());
+        return new ResultVo<>(EnumResultCode.FAILED, e.getMsg());
     }
 
     /**
@@ -37,6 +37,6 @@ public class ExceptionControllerAdvice {
     public ResultVo<String> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
         ObjectError objectError = e.getBindingResult().getAllErrors().get(0);
         // 注意哦，这里传递的响应码枚举
-        return new ResultVo<>(ResultCode.VALIDATE_FAILED, objectError.getDefaultMessage());
+        return new ResultVo<>(EnumResultCode.VALIDATE_FAILED, objectError.getDefaultMessage());
     }
 }

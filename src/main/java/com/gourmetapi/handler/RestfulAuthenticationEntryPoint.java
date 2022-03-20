@@ -1,7 +1,7 @@
 package com.gourmetapi.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.gourmetapi.model.result.ResultCode;
+import com.gourmetapi.model.enums.EnumResultCode;
 import com.gourmetapi.model.result.ResultVo;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -25,7 +25,7 @@ public class RestfulAuthenticationEntryPoint implements AuthenticationEntryPoint
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         response.setStatus(200);
-        ResultVo<?> resultVo = new ResultVo<>(ResultCode.AUTH_INVALID,null);
+        ResultVo<?> resultVo = new ResultVo<>(EnumResultCode.AUTH_INVALID,null);
         response.getWriter().println(JSON.toJSONString(resultVo));
         response.getWriter().flush();
     }

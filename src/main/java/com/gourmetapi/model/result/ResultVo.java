@@ -1,5 +1,6 @@
 package com.gourmetapi.model.result;
 
+import com.gourmetapi.model.enums.EnumResultCode;
 import lombok.Getter;
 
 /**
@@ -25,10 +26,10 @@ public class ResultVo<T> {
     private T data;
 
     public ResultVo(T data) {
-        this(ResultCode.SUCCESS, data);
+        this(EnumResultCode.SUCCESS, data);
     }
 
-    public ResultVo(ResultCode resultCode, T data) {
+    public ResultVo(EnumResultCode resultCode, T data) {
         this.code = resultCode.getCode();
         this.msg = resultCode.getMsg();
         this.data = data;
