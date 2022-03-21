@@ -37,8 +37,8 @@ public class MyUserDetails implements Serializable, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return permissionEntityList.stream()
-                .map(PermissionEntity::getCode)
+        return roleEntityList.stream()
+                .map(RoleEntity::getCode)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
